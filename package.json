@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "fs": "^0.0.1-security",
+    "lodash": "^4.17.21",
     "next": "15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
