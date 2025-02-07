@@ -23,6 +23,10 @@ export async function GET(req) {
         filteredIcons = Object.entries(data);
     }
 
+    filteredIcons.sort((a, b) => {
+        return b[1].voted - a[1].voted;
+    });
+
     const startIndex = (page - 1) * limit;
     const endIndex = startIndex + limit;
     const paginatedIcons = filteredIcons.slice(startIndex, endIndex);
