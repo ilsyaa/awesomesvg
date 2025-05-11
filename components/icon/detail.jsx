@@ -51,7 +51,7 @@ export default function IconDetail({ iconDetail, setIconDetail }) {
           (icon && displayIcon) ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div className="relative aspect-[1/1] bg-cat-100 dark:bg-cat-700/20 rounded-xl flex flex-col justify-center items-center text-center">
-                <div className="[&>svg]:w-16 [&>svg]:h-16">
+                <div className="[&>svg]:w-16 [&>svg]:h-16 hover:[&>svg]:scale-200 [&>svg]:transition-transform [&>svg]:ease-in-out [&>svg]:duration-300">
                   <Svg
                     svg={displayIcon.svg}
                     swap={displayIcon.swap}

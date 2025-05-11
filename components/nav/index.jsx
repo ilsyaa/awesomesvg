@@ -11,7 +11,7 @@ export default function Nav() {
   const { loading } = useLoading();
 
   const debouncedSetSearch = useMemo(
-    () => debounce((value) => setSearch(value), 0),
+    () => debounce((value) => setSearch(value), 500),
     [setSearch]
   );
 

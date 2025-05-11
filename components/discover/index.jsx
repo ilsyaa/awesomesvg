@@ -11,7 +11,6 @@ const ICONS_PER_PAGE = 18;
 
 export function Discover() {
   const { search } = useSearch();
-  const [page, setPage] = useState(1);
   const [icons, setIcons] = useState([]);
   const { loading, setLoading } = useLoading();
   const [ iconDetail, setIconDetail ] = useState(null);
@@ -36,38 +35,42 @@ export function Discover() {
   }, []);
 
   useEffect(() => {
-    debouncedFetch(page, search);
+    debouncedFetch(1, search);
     return () => {
       debouncedFetch.cancel();
     };
-  }, [page, search, debouncedFetch]);
+  }, [search, debouncedFetch]);
 
   return (
     <>
       <div className="flex flex-col gap-10">
-        {Object.values(icons).map((row, index) => (
-          <div key={index}>
-            <div className="text-sm font-bold uppercase mb-5 hover:underline">
-              <Link href={`/icons?pack=${row.pack}&style=${row.style}`}>
-                {row.pack + " " + row.style}
-              </Link>
-            </div>
-            <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-4">
-              {row.icons.map((icon, index) => (
-                <div key={index}>
-                  <IconWrapper
-                    id={icon._id}
-                    pack={row.pack}
-                    style={row.style}
-                    svg={icon.svg}
-                    label={icon.label}
-                    setIconDetail={setIconDetail}
-                  />
+        {
+          (icons &&
+            Object.values(icons).map((row, index) => (
+              <div key={index}>
+                <div className="text-sm font-bold uppercase mb-5 hover:underline">
+                  <Link href={`/icons?pack=${row.pack}&style=${row.style}`}>
+                    {row.pack + " " + row.style}
+                  </Link>
                 </div>
-              ))}
-            </div>
-          </div>
-        ))}
+                <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-4">
+                  {row.icons.map((icon, index) => (
+                    <div key={index}>
+                      <IconWrapper
+                        id={icon._id}
+                        pack={row.pack}
+                        style={row.style}
+                        svg={icon.svg}
+                        label={icon.label}
+                        setIconDetail={setIconDetail}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))
+          )
+        }
       </div>
       <IconDetail
         iconDetail={iconDetail}
